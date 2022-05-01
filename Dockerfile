@@ -19,6 +19,7 @@ ENV UPX_UCLDIR ~/ucl-1.03
 
 WORKDIR /upx
 RUN git submodule update --init --recursive
+RUN rm -rf ./tests
 RUN make all
 
 # Package Stage
