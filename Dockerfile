@@ -25,5 +25,7 @@ RUN make all
 # Package Stage
 FROM --platform=linux/amd64 ubuntu:20.04
 RUN apt-get update && apt-get install -y zlib1g-dev
+RUN mkdir /testsuite
+RUN cp /bin/cat /testsuite/cat
 
 COPY --from=builder /upx/src/upx.out /upx
