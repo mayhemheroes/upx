@@ -40,7 +40,7 @@ class PeFile : public Packer
 {
     typedef Packer super;
 public:
-    virtual int getVersion() const { return 13; }
+    virtual int getVersion() const override { return 13; }
 protected:
     class Interval;
     class Reloc;
@@ -84,7 +84,7 @@ protected:
                  ord_mask_t ord_mask, bool set_oft);
 
     // unpacker capabilities
-    virtual bool canUnpackVersion(int version) const
+    virtual bool canUnpackVersion(int version) const override
         {  return (version >= 12 && version <= 13); }
 
     int canUnpack0(unsigned max_sections, LE16 &ih_objects,
@@ -92,7 +92,7 @@ protected:
 
 protected:
     virtual int readFileHeader();
-    virtual bool testUnpackVersion(int version) const;
+    virtual bool testUnpackVersion(int version) const override;
     virtual void readPeHeader() = 0;
 
     unsigned pe_offset;
@@ -460,15 +460,15 @@ protected:
     virtual ~PeFile32();
     void pack0(OutputFile *fo, unsigned subsystem_mask,
                upx_uint64_t default_imagebase, bool last_section_rsrc_only);
-    virtual void unpack(OutputFile *fo);
-    virtual int canUnpack();
+    virtual void unpack(OutputFile *fo) override;
+    virtual int canUnpack() override;
 
-    virtual void readPeHeader();
+    virtual void readPeHeader() override;
 
-    virtual unsigned processImports();
-    virtual void processRelocs();
-    virtual void processTls(Interval *);
-    virtual void processTls(Reloc *, const Interval *, unsigned);
+    virtual unsigned processImports() override;
+    virtual void processRelocs() override;
+    virtual void processTls(Interval *) override;
+    virtual void processTls(Reloc *, const Interval *, unsigned) override;
 
     __packed_struct(pe_header_t)
         // 0x0
@@ -522,15 +522,15 @@ protected:
     void pack0(OutputFile *fo, unsigned subsystem_mask,
                upx_uint64_t default_imagebase);
 
-    virtual void unpack(OutputFile *fo);
-    virtual int canUnpack();
+    virtual void unpack(OutputFile *fo) override;
+    virtual int canUnpack() override;
 
-    virtual void readPeHeader();
+    virtual void readPeHeader() override;
 
-    virtual unsigned processImports();
-    virtual void processRelocs();
-    virtual void processTls(Interval *);
-    virtual void processTls(Reloc *, const Interval *, unsigned);
+    virtual unsigned processImports() override;
+    virtual void processRelocs() override;
+    virtual void processTls(Interval *) override;
+    virtual void processTls(Reloc *, const Interval *, unsigned) override;
 
     __packed_struct(pe_header_t)
         // 0x0
