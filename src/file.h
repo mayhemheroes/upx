@@ -109,6 +109,7 @@ public:
     virtual upx_off_t seek(upx_off_t off, int whence) override;
     virtual upx_off_t tell() const override;
     virtual upx_off_t st_size_orig() const;
+    const char *getName() const { return _name; }
 protected:
     upx_off_t _length_orig;
 };
